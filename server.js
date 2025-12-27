@@ -7,12 +7,10 @@ const mqtt = require("mqtt");
 
 const app = express();
 
-// ✅ ต้องประกาศก่อน connect
 const MQTT_URL  = process.env.MQTT_URL;
 const MQTT_USER = process.env.MQTT_USER;
 const MQTT_PASS = process.env.MQTT_PASS;
 
-// ✅ เช็คกันพลาด
 console.log("MQTT_URL:", MQTT_URL ? "OK" : "MISSING");
 console.log("MQTT_USER:", MQTT_USER ? "OK" : "MISSING");
 console.log("MQTT_PASS:", MQTT_PASS ? "OK" : "MISSING");
@@ -36,7 +34,7 @@ app.use((req, res, next) => {
 });
 app.post("/api/eq", (req, res) => {
   const payload = req.body;
-
+  console.log("HIT /api/eq BODY:", req.body);
   const topic =
     payload?.type === "eq_power"
       ? "eq/power"
